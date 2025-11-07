@@ -10,7 +10,7 @@ from azure.storage.blob import BlobServiceClient, ContentSettings, PublicAccess
 # ------------------------------------------------------------
 STORAGE_ACCOUNT_URL = "//jwj3bjstoragecase07.blob.core.windows.net"
 IMAGES_CONTAINER = "lanternfly-images-obzocjkq"
-CONNECTION_STRING = "AZDefaultEndpointsProtocol=https;AccountName=jwj3bjstoragecase07;AccountKey=7kMZTa+L2mHLqnddruq0+dBHfPEyP9JvzAWJZN05BsWq7ytSQQHvUP+EsTkaUwoOIoj+tafFaR8b+AStL2HYjw==;EndpointSuffix=core.windows.net"
+CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
 
 # ------------------------------------------------------------
 # Flask setup + logging
@@ -105,7 +105,7 @@ def gallery():
 
 @app.route("/health", methods=["GET"])
 def health():
-    return "OK", 200
+    return jsonify({"status": "ok"}), 200
 
 @app.get("/")
 def index():
